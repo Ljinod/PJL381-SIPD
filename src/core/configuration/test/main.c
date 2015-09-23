@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-#include "configuration.h"
-#include "../beans/my_info.h"
+#include "../configuration.h"
+#include "../../beans/my_info.h"
 
 int main(void)
 {
