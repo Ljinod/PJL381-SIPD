@@ -1,6 +1,6 @@
 /**
  * @file create_config.c
- * @brief 
+ * @brief   XXX Add brief description!
  * @author  Loudet Julien <loudet.julien@gmail.com>
  * @version 1.1
  * @date 2015-09
@@ -23,7 +23,7 @@
  *          If the user cannot provide a public/private RSA pair of keys then
  *          a new pair is created and stored here: $HOME/.config/sipd/keys/
  *
- *          The configuration file is stored here: 
+ *          The configuration file is stored here:
  *          $HOME/.config/sipd/my_info.xml
  *
  *          At the same time the MyInfo_t structure is filled with the
@@ -46,14 +46,14 @@ MyInfo_t* create_user_configuration_file(const char *config_file_path)
     MyInfo_t *my_info = malloc(sizeof(MyInfo_t));
 
     /* The buffer to receive the user's input */
-    char buffer[BUFF_SIZE];
-    memset(buffer, '\0', BUFF_SIZE);
+    char buffer[ARR_SIZE];
+    memset(buffer, '\0', ARR_SIZE);
 
     /* The XML writer, to store the information in the file my_info.xml */
     int rc;
     xmlTextWriterPtr writer;
     writer = xmlNewTextWriterFilename(config_file_path, 0);
-    if (writer == NULL) 
+    if (writer == NULL)
     {
         fprintf(stderr, "testXmlwriterFilename: Error creating the xml "
                         "writer\n");
@@ -71,7 +71,7 @@ MyInfo_t* create_user_configuration_file(const char *config_file_path)
 
     /* The first element being the root of the xml, we call it MY_INFO */
     rc = xmlTextWriterStartElement(writer, BAD_CAST "MY_INFO");
-    if (rc < 0) 
+    if (rc < 0)
     {
         fprintf(stderr,
                 "testXmlwriterFilename: Error at xmlTextWriterStartElement\n");
@@ -82,21 +82,21 @@ MyInfo_t* create_user_configuration_file(const char *config_file_path)
     fprintf(stdout, "\nPLEASE FILL IN THE FOLLOWING REQUIRED INFORMATION:\n");
 
     /* Tcell ip address */
-    get_user_input(buffer, BUFF_SIZE, "\nThe IP address of your tcell: ");
+    get_user_input(buffer, ARR_SIZE, "\nThe IP address of your tcell: ");
     rc = xmlTextWriterWriteElement(writer, BAD_CAST TCELL_IP,
                                      BAD_CAST buffer);
     if (rc < 0) { goto error_write_attribute; }
     strcpy(my_info->my_tcell_ip, buffer); /* Update my_info */
 
     /* Tcell port */
-    get_user_input(buffer, BUFF_SIZE, "\nThe port of your tcell: ");
+    get_user_input(buffer, ARR_SIZE, "\nThe port of your tcell: ");
     rc = xmlTextWriterWriteElement(writer, BAD_CAST TCELL_PORT,
                                      BAD_CAST buffer);
     if (rc < 0) { goto error_write_attribute; }
     my_info->my_tcell_port = atoi(buffer); /* Update my_info */
 
     /* User id */
-    get_user_input(buffer, BUFF_SIZE, "\nEnter your name (this field will be "
+    get_user_input(buffer, ARR_SIZE, "\nEnter your name (this field will be "
                                       "used to generate your unique \n"
                                       "global id): ");
     rc = xmlTextWriterWriteElement(writer, BAD_CAST USER_ID,
@@ -105,20 +105,20 @@ MyInfo_t* create_user_configuration_file(const char *config_file_path)
     strcpy(my_info->my_gid, buffer); /* Update my_info */
 
     /* RSA keys */
-    get_user_input(buffer, BUFF_SIZE, "\nDo you have an RSA key pair that you "
+    get_user_input(buffer, ARR_SIZE, "\nDo you have an RSA key pair that you "
                                       "would like to associate to your \n"
                                       "tcell? If not a new one will be created"
                                       "\n[y/n]: ");
     if(buffer[0] == 'y' || buffer[0] == 'Y')
     {
         fprintf(stdout, "Enter their absolute paths:\n");
-        get_user_input(buffer, BUFF_SIZE, "(public key absolute path): ");
+        get_user_input(buffer, ARR_SIZE, "(public key absolute path): ");
         rc = xmlTextWriterWriteElement(writer, BAD_CAST PUB_KEY_PATH,
                                          BAD_CAST buffer);
         if (rc < 0) { goto error_write_attribute; }
         strcpy(my_info->my_public_key, buffer); /* Update my_info */
 
-        get_user_input(buffer, BUFF_SIZE, "(private key absolute path): ");
+        get_user_input(buffer, ARR_SIZE, "(private key absolute path): ");
         rc = xmlTextWriterWriteElement(writer, BAD_CAST PRIV_KEY_PATH,
                                          BAD_CAST buffer);
         if (rc < 0) { goto error_write_attribute; }
@@ -126,7 +126,7 @@ MyInfo_t* create_user_configuration_file(const char *config_file_path)
     }
     else
     {
-        get_user_input(buffer, BUFF_SIZE, "\nEnter a name for the RSA keys, "
+        get_user_input(buffer, ARR_SIZE, "\nEnter a name for the RSA keys, "
                                           "\".pub\" will be appended for the\n"
                                           "public key: ");
 
@@ -134,7 +134,7 @@ MyInfo_t* create_user_configuration_file(const char *config_file_path)
          * For more details about this step read the man pages of openssl(1)
          * and genrsa(1). */
         fprintf(stdout, "=== Generating the private key:\n");
-        char priv_key_filename[BUFF_SIZE], cmd[BUFF_SIZE];
+        char priv_key_filename[ARR_SIZE], cmd[ARR_SIZE];
         sprintf(priv_key_filename, "%s/.config/sipd/keys/%s", getenv("HOME"),
                 buffer);
         sprintf(cmd, "openssl genrsa -out %s -aes256 2048", priv_key_filename);
@@ -145,12 +145,12 @@ MyInfo_t* create_user_configuration_file(const char *config_file_path)
                                          BAD_CAST priv_key_filename);
         if (rc < 0) { goto error_write_attribute; }
         strcpy(my_info->my_private_key, priv_key_filename); /* Update my_info */
-        
+
         /* Generation of public key from private key.
          * For more details read the man pages of rsa(1). */
         fprintf(stdout, "=== Generating the public key:\n");
-        char pub_key_filename[BUFF_SIZE];
-        memset(cmd, '\0', BUFF_SIZE); /* wipe previous content */
+        char pub_key_filename[ARR_SIZE];
+        memset(cmd, '\0', ARR_SIZE); /* wipe previous content */
         sprintf(pub_key_filename, "%s.pub", priv_key_filename);
         sprintf(cmd, "openssl rsa -in %s -pubout -out %s", priv_key_filename,
                 pub_key_filename);

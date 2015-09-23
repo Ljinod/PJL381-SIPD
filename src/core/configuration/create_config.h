@@ -1,6 +1,6 @@
 /**
  * @file    create_config.h
- * @brief
+ * @brief   XXX Add brief description!
  * @author  Loudet Julien <loudet.julien@gmail.com>
  * @version 1.1
  * @date    2015-09
@@ -19,7 +19,7 @@
  *          If the user cannot provide a public/private RSA pair of keys then
  *          a new pair is created and stored here: $HOME/.config/sipd/keys/
  *
- *          The configuration file is stored here: 
+ *          The configuration file is stored here:
  *          $HOME/.config/sipd/my_info.xml
  *
  *          At the same time the MyInfo_t structure is filled with the

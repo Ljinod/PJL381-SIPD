@@ -1,6 +1,6 @@
 /**
  * @file    parse_config.c
- * @brief 
+ * @brief
  * @author  Loudet Julien <loudet.julien@gmail.com>
  * @version 1.1
  * @date    2015-09
@@ -23,14 +23,14 @@
  *          </MY_INFO>
  *
  *          NOTES: (*) The order of the parameters does not matter.
- *                 (*) The spelling and case of the parameters MUST be the 
+ *                 (*) The spelling and case of the parameters MUST be the
  *                     SAME as above. See the header file "configuration.h".
  *                 (*) There MUST be NO SPACES in the values you provide.
  *                 (*) Other parameters will not be processed. Thus you can add
  *                     whatever information you want (for instance other path
  *                     for other RSA keys), only the parameter above will be
  *                     taken into account.
- *          
+ *
  *          ===================================================================
  *          TO BE DONE
  *          ===================================================================
@@ -52,18 +52,18 @@
 #include "configuration.h"
 
 
-/* Process a node from the configuration file pointed to by the 
+/* Process a node from the configuration file pointed to by the
  * xmlTextReaderPtr */
-void process_config_file(xmlDocPtr doc, xmlNodePtr root_element_node, 
+void process_config_file(xmlDocPtr doc, xmlNodePtr root_element_node,
                          MyInfo_t *my_info);
 
 
 /**
- * @brief 
+ * @brief
  *
  * @param config_file_path
  *
- * @return 
+ * @return
  */
 MyInfo_t* parse_configuration_file(const char *config_file_path)
 {
@@ -71,7 +71,7 @@ MyInfo_t* parse_configuration_file(const char *config_file_path)
     MyInfo_t *my_info = malloc(sizeof(MyInfo_t));
 
     /* The XML part: to parse a file we need a "doc" container as well as a
-     * "root_element" to begin inspecting. */ 
+     * "root_element" to begin inspecting. */
     xmlDocPtr  doc               = NULL;
     xmlNodePtr root_element_node = NULL;
 
@@ -100,10 +100,10 @@ MyInfo_t* parse_configuration_file(const char *config_file_path)
  * @param root_node A pointer to the root element node
  * @param my_info The structure that will contain the user's information
  */
-void process_config_file(xmlDocPtr doc, xmlNodePtr root_element_node, 
+void process_config_file(xmlDocPtr doc, xmlNodePtr root_element_node,
                          MyInfo_t *my_info)
 {
-    const xmlChar *node_name; 
+    const xmlChar *node_name;
     xmlChar       *text_node_value;
     xmlNodePtr     node, text_node;
 

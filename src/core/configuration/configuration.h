@@ -1,6 +1,6 @@
 /**
  * @file    configuration.h
- * @brief 
+ * @brief   XXX Add brief description!
  * @author  Loudet Julien <loudet.julien@gmail.com>
  * @version 1.1
  * @date    2015-09
@@ -13,7 +13,6 @@
 
 #include "../beans/my_info.h"
 
-#define BUFF_SIZE 256
 #define XML_ENCODING  "UTF-8"
 #define TCELL_IP      "tcell_ip"
 #define TCELL_PORT    "tcell_port"

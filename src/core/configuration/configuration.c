@@ -1,6 +1,6 @@
 /**
  * @file    configuration.c
- * @brief 
+ * @brief   XXX Add brief description!
  * @author  Loudet Julien <loudet.julien@gmail.com>
  * @version 1.1
  * @date    2015-04
@@ -16,7 +16,7 @@
 #include "configuration.h"
 #include "create_config.h" /**< "create_user_configuration_file" function" */
 #include "parse_config.h" /**< "parse_configuration_file" function */
-#include "../tools/utils.h" /**< "get_user_input" function */
+#include "../tools/utils.h" /**< "get_user_input", "ARR_SIZE" */
 
 
 /**
@@ -47,10 +47,10 @@ MyInfo_t* ask_user_configuration_file(void)
     MyInfo_t *my_info;
 
     /* To store the user's input */
-    char buffer[BUFF_SIZE];
+    char buffer[ARR_SIZE];
 
     /* Default config file path */
-    memset(buffer, '\0', BUFF_SIZE);
+    memset(buffer, '\0', ARR_SIZE);
     sprintf(buffer, "%s/.config/sipd/my_info.xml", getenv("HOME"));
 
     fprintf(stdout, "Use default configuration file? "
@@ -78,7 +78,7 @@ MyInfo_t* ask_user_configuration_file(void)
     /* User wants to load a custom configuration file */
     else
     {
-        get_user_input(buffer, BUFF_SIZE, "Enter the path of the custom "
+        get_user_input(buffer, ARR_SIZE, "Enter the path of the custom "
                                           "configuration file: ");
         /* XXX parse the custom configuration file if it exists */
         my_info = NULL;

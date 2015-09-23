@@ -1,6 +1,6 @@
 /**
  * @file    parse_config.h
- * @brief 
+ * @brief   XXX Add brief description!
  * @author  Loudet Julien <loudet.julien@gmail.com>
  * @version 1.1
  * @date    2015-09
@@ -24,7 +24,7 @@
  *          </MY_INFO>
  *
  *          NOTES: (*) The order of the parameters does not matter.
- *                 (*) The spelling and case of the parameters MUST be the 
+ *                 (*) The spelling and case of the parameters MUST be the
  *                     SAME as above. See the header file "configuration.h".
  *                 (*) There MUST be NO SPACES in the values you provide.
  *                 (*) Other parameters will not be processed. Thus you can add
