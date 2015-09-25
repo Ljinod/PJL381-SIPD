@@ -103,7 +103,7 @@ FileDesc_t* aes_encrypt_file(const char *file_path)
      * is not 0 we can be sure that something wrong happened. */
     if(pclose(file_key_iv) != 0)
     {
-        print_error_info("[ERROR] Encryption failed.\n");
+        print_error_info("\n[ERROR] Encryption failed.\n");
         exit(-1);
     }
 
