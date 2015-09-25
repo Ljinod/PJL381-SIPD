@@ -9,7 +9,11 @@ int main(void)
 
     if(f_desc == NULL)
     {
-        fprintf(stdout, "File desc is NULL.\n");
+        fprintf(stderr, "Encrypt failed.\n");
+    }
+    else if(aes_decrypt_file(f_desc) == NULL)
+    {
+        fprintf(stderr, "Decrypt failed.\n");
     }
     return 0;
 }

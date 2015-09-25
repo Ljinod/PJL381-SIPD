@@ -11,6 +11,8 @@
 
 #include "../beans/file_desc.h"
 
+#define TEMP_FOLDER  ((const char *) "sipd/temp")
+#define FILES_FOLDER ((const char *) "sipd/files")
 
 /**
  * @brief XXX Add brief description!
@@ -25,11 +27,11 @@ FileDesc_t* aes_encrypt_file(const char *file_path);
 /**
  * @brief XXX Add brief description!
  *
- * @param enc_file_path
+ * @param enc_file_desc
  *
  * @return
  */
-const char* aes_decrypt_file(const char *enc_file_path);
+const char* aes_decrypt_file(FileDesc_t *enc_file_desc);
 
 
 #endif
