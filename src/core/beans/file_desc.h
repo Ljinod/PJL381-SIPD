@@ -20,10 +20,12 @@ typedef struct FileDesc
 {
     char file_gid[ARR_SIZE];
     char file_id[ARR_SIZE];
-    char symmetric_key[ARR_SIZE];
-    char initialisation_vector[ARR_SIZE];
+    char path[ARR_SIZE];
     char type[ARR_SIZE];
     char description[ARR_SIZE];
+    char salt[ARR_SIZE]; /* For future version! */
+    char symmetric_key[ARR_SIZE];
+    char initialisation_vector[ARR_SIZE];
 } FileDesc_t;
 
 #endif
