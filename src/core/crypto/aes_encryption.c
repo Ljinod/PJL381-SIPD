@@ -78,7 +78,7 @@ FileDesc_t* aes_encrypt_file(const char *file_path)
     strcpy(enc_file_desc->path, file_enc_path);
 
     /* XXX Describe the openssl command! */
-    sprintf(cmd, "openssl enc -aes-256-cbc -a -nosalt "
+    sprintf(cmd, "openssl enc -aes-256-cbc -a -md sha1 -nosalt "
                  "-in %s -out %s -p", file_path, file_enc_path);
 
     /* The result of popen is a file stream containing the output of the
@@ -164,7 +164,7 @@ const char* aes_decrypt_file(FileDesc_t* enc_file_desc)
                                        enc_file_desc->file_id);
 
     /* We then compute the command to issue */
-    sprintf(cmd,"openssl enc -aes-256-cbc -d -a -in %s -out %s "
+    sprintf(cmd,"openssl enc -aes-256-cbc -d -a -md sha1 -in %s -out %s "
                 "-K %s -iv %s", enc_file_desc->path, dec_file_path,
                 enc_file_desc->symmetric_key,
                 enc_file_desc->initialisation_vector);
