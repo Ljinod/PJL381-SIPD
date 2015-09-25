@@ -1,18 +1,21 @@
-OBJECTS_AES = aes_encryption.o
-HEADERS_AES = ../aes_encryption.h ../../beans/file_desc.h ../../tools/utils.h
+OBJECTS = aes_encryption.o rsa_encryption.o
+HEADERS = ../aes_encryption.h ../../beans/file_desc.h ../../tools/utils.h \
+		  ../rsa_encryption.h
 
 EXEC = main.exe
 CC = gcc
 CFLAGS = -Wall -Werror -O2
 
-$(EXEC): main.c $(OBJECTS_AES) $(HEADERS_AES)
-	$(CC) main.c $(OBJECTS_AES) $(CFLAGS) -o $@
+$(EXEC): main.c $(OBJECTS) $(HEADERS)
+	$(CC) main.c $(OBJECTS) $(CFLAGS) -o $@
 
-aes_encryption.o: ../aes_encryption.c $(HEADERS_AES)
-	$(CC) -c ../aes_encryption.c $(CFLAGS) -o $@
+aes_encryption.o: ../aes_encryption.c $(HEADERS)
+	$(CC) -c $< $(CFLAGS) -o $@
 
+rsa_encryption.o: ../rsa_encryption.c $(HEADERS)
+	$(CC) -c $< $(CFLAGS) -o $@
 
 .PHONY: clean
 
 clean:
-	@rm -vf $(OBJECTS_AES) $(EXEC) *.enc
+	@rm -vf $(OBJECTS) $(EXEC) *.enc
