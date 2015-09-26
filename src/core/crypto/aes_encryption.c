@@ -104,8 +104,6 @@ FileDesc_t* aes_encrypt_file(const char *file_path)
         /* Strip the newline that fgets keeps */
         key_iv[strcspn(key_iv, "\n")] = '\0';
 
-        fprintf(stdout, "FGETS: %s\n", key_iv);
-
         char *tok;
         /* Separate label from its value */
         tok = strtok(key_iv, "=");
@@ -114,19 +112,16 @@ FileDesc_t* aes_encrypt_file(const char *file_path)
         {
             tok = strtok(NULL, "\0");
             strcpy(enc_file_desc->symmetric_key, tok);
-            fprintf(stdout, "       KEY=%s\n", tok);
         }
         else if(strncmp(tok, "iv", 2) == 0)
         {
             tok = strtok(NULL, "\0");
             strcpy(enc_file_desc->initialisation_vector, tok);
-            fprintf(stdout, "       IV=%s\n", tok);
         }
         else if(strncmp(tok, "salt", 4) == 0)
         {
             tok = strtok(NULL, "\0");
             strcpy(enc_file_desc->salt, tok);
-            fprintf(stdout, "       SALT=%s\n", tok);
         }
 
         /* Wipe previous content entirely */

@@ -70,7 +70,6 @@ const char* rsa_decrypt_msg(const char *enc_msg, const char *priv_key_path)
     /* XXX Explain command! */
     sprintf(cmd, "echo \"%s\" | openssl enc -base64 -A -d | "
                  "openssl rsautl -decrypt -inkey %s", enc_msg, priv_key_path);
-    fprintf(stdout, "[DEBUG] CMD: %s\n", cmd);
 
     /* We get the decrypted message from the output of the command */
     FILE *dec_msg_stream = popen((const char *)cmd, "r");
