@@ -37,8 +37,10 @@
 
 #include <stdio.h>  /* popen, sprintf, fprintf, remove */
 #include <string.h> /* strcspn, strtok, strcpy, strncmp, basename */
-#include <unistd.h> /* access */
+#include <unistd.h> /* access, stat */
 #include <stdlib.h> /* exit, getenv */
+#include <sys/types.h> /* stat */
+#include <sys/stat.h>  /* stat */
 
 
 
@@ -135,6 +137,17 @@ FileDesc_t* aes_encrypt_file(const char *file_path)
         print_error_info("\n[ERROR] Encryption failed.\n");
         exit(-1);
     }
+
+    /* We get the size of the encrypted file */
+    struct stat *buf = malloc(sizeof(struct stat));
+    if(stat(enc_file_desc->path, buf) != 0 && buf != NULL)
+    {
+        fprintf(stderr, "[ERROR] An error occurred while trying to read the"
+                        "        stats of the file %s\n", enc_file_desc->path);
+        exit(-1);
+    }
+    enc_file_desc->size = buf->st_size;
+    free(buf);
 
     /* If we've reached this part of the code then everything went fine! */
     fprintf(stdout, "\n[INFO] Encryption succeeded.\n");

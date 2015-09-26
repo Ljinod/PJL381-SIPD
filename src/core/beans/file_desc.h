@@ -20,6 +20,7 @@ typedef struct FileDesc
 {
     char file_gid[ARR_SIZE];
     char file_id[ARR_SIZE];
+    int  size;
     char path[ARR_SIZE];
     char type[ARR_SIZE];
     char description[ARR_SIZE];
