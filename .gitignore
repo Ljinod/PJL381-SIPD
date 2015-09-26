@@ -33,3 +33,6 @@
 
 # Encrypted files
 *.enc
+
+# Music files
+*.flac
