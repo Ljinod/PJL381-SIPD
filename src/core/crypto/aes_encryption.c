@@ -146,7 +146,7 @@ FileDesc_t* aes_encrypt_file(const char *file_path)
                         "        stats of the file %s\n", enc_file_desc->path);
         exit(-1);
     }
-    enc_file_desc->size = buf->st_size;
+    sprintf(enc_file_desc->size, "%i", (int) buf->st_size);
     free(buf);
 
     /* If we've reached this part of the code then everything went fine! */

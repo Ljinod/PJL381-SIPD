@@ -17,7 +17,7 @@
 #include <netdb.h>
 #include <unistd.h> /* close */
 #include <string.h> /* strlen */
-#include <stdlib.h>  /* exit */
+#include <stdlib.h>  /* exit, atoi */
 
 #include "connection.h"
 #include "../tools/utils.h"
@@ -31,7 +31,7 @@
  * @return if successful the function returns the corresponding socket file
  *         descriptor.
  */
-int connect_to(const char *ip_addr, int port)
+int connect_to(const char *ip_addr, const char *port)
 {
     int                sock_fd;
     struct sockaddr_in server;
@@ -45,7 +45,7 @@ int connect_to(const char *ip_addr, int port)
 
     /* Server address */
     server.sin_family      = AF_INET;
-    server.sin_port        = htons(port);
+    server.sin_port        = htons(atoi(port));
     server.sin_addr.s_addr = inet_addr(ip_addr);
 
     /* Connect to server */

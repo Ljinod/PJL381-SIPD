@@ -73,8 +73,8 @@ int main(int argc, char **argv)
 
     send_msg_to(peer_socket, "OK");
 
-    recv_file_from(peer_socket, 27, "transfered_text.txt");
-    //recv_file_from(peer_socket, 29506658, "files/music.flac");
+    //recv_file_from(peer_socket, "27", "transfered_text.txt");
+    recv_file_from(peer_socket, "29506658", "files/music.flac");
 
     close(peer_socket);
     close(server_socket);

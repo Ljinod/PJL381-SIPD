@@ -10,7 +10,7 @@
  * @details (last edited by Loudet Julien on 2015/09)
  */
 
-int connect_to(const char *ip_addr, int port);
+int connect_to(const char *ip_addr, const char *port);
 
 
 void send_msg_to(int sock_fd, const char* msg);
