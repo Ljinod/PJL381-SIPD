@@ -44,8 +44,6 @@
 #define MSG_LIST_FILES       ((const char *) "list"            )
 #define MSG_FILE             ((const char *) "file"            )
 
-#define DB_NAME             ((const char *) "Tcell.db"         )
-
 #define AUTO_DETER_SIZE      ((int)          -1            )
 
 #define DEBUG_LINE fprintf(stdout, "DEBUG: %i\n", __LINE__)
