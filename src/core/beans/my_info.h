@@ -20,7 +20,7 @@ typedef struct MyInfo
 {
     char my_gid[ARR_SIZE];
     char my_tcell_ip[ARR_SIZE];
-    int  my_tcell_port;
+    char my_tcell_port[ARR_SIZE];
     char my_public_key[ARR_SIZE];
     char my_private_key[ARR_SIZE];
 } MyInfo_t;

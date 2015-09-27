@@ -124,7 +124,7 @@ void process_config_file(xmlDocPtr doc, xmlNodePtr root_element_node,
             if(xmlStrcmp((const xmlChar*) node_name,
                          (const xmlChar*) TCELL_PORT) == 0)
             {
-                my_info->my_tcell_port = atoi((const char*) text_node_value);
+                strcpy(my_info->my_tcell_port, (const char*) text_node_value);
             }
             else if(xmlStrcmp((const xmlChar*) node_name,
                               (const xmlChar*) TCELL_IP) == 0)

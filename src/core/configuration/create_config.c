@@ -93,7 +93,7 @@ MyInfo_t* create_user_configuration_file(const char *config_file_path)
     rc = xmlTextWriterWriteElement(writer, BAD_CAST TCELL_PORT,
                                      BAD_CAST buffer);
     if (rc < 0) { goto error_write_attribute; }
-    my_info->my_tcell_port = atoi(buffer); /* Update my_info */
+    strcpy(my_info->my_tcell_port, (buffer)); /* Update my_info */
 
     /* User id */
     get_user_input(buffer, ARR_SIZE, "\nEnter your name (this field will be "
