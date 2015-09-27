@@ -21,7 +21,7 @@
  *
  * @return
  */
-const char* rsa_encrypt_msg(const char *msg, const char *pub_key_path)
+const char* rsa_encrypt_msg(const char *pub_key_path, const char *msg)
 {
     char  cmd[CMD_SIZE];
     char *enc_msg = malloc(RSA_SIZE * sizeof(char));
@@ -62,7 +62,7 @@ const char* rsa_encrypt_msg(const char *msg, const char *pub_key_path)
  *
  * @return
  */
-const char* rsa_decrypt_msg(const char *enc_msg, const char *priv_key_path)
+const char* rsa_decrypt_msg(const char *priv_key_path, const char *enc_msg)
 {
     char  cmd[CMD_SIZE];
     char *dec_msg = malloc(RSA_SIZE * sizeof(char));

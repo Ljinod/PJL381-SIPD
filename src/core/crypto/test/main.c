@@ -36,11 +36,11 @@ int main(void)
     fprintf(stdout, "\n[TEST] Message: %s\n", msg);
 
     const char *enc_msg =
-        rsa_encrypt_msg(msg, "/home/julien/.config/sipd/keys/julien-sipd-rsa.pub");
+        rsa_encrypt_msg("/home/julien/.config/sipd/keys/julien-sipd-rsa.pub", msg);
     fprintf(stdout, "[TEST] Encrypted message: %s\n", enc_msg);
 
     const char *dec_msg =
-        rsa_decrypt_msg(enc_msg, "/home/julien/.config/sipd/keys/julien-sipd-rsa");
+        rsa_decrypt_msg("/home/julien/.config/sipd/keys/julien-sipd-rsa", enc_msg);
     fprintf(stdout, "[TEST] Decrypted message: %s\n", dec_msg);
 
     return 0;
