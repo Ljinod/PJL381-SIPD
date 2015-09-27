@@ -51,6 +51,7 @@
 #define DEBUG_LINE           fprintf(stdout, "DEBUG: %i\n", __LINE__)
 #define ARR_SIZE             (256)
 #define CMD_SIZE             (512)
+#define MSG_SIZE             (2048)
 
 static inline void print_error_info(const char *msg)
 {
