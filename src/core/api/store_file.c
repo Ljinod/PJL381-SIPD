@@ -34,9 +34,7 @@ void store_file(MyInfo_t *my_info, const char *file_path)
     /* Encrypt the file to send using AES alogithm: the aes_encrypt_file
      * function creates the FileDesc_t structure and fills some of the fields;
      * namely: file_id, size, path, symmetric_key, initialisation_vector */
-    fprintf(stdout, "[STORE] Encrypting file...");
     FileDesc_t* file_desc = aes_encrypt_file(file_path);
-    fprintf(stdout, "Ok.\n");
 
     /* Fill in the file_gid: it is a combination of the user's gid and the
      * file id */
