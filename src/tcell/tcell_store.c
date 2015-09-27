@@ -95,12 +95,6 @@ void tcell_store(MyInfo_t *my_info, int sock_fd, char *store_msg)
         msg_part = strtok_r(NULL, MSG_SEP, &msg_end);
     }
 
-    /* Set the path of the file on the tcell */
-    char *tcell_files_path = get_tcell_files_path();
-    char buf_path[ARR_SIZE];
-    sprintf(buf_path, "%s/%s", tcell_files_path, file_desc.file_id);
-    strcpy(file_desc.path, buf_path);
-    free(tcell_files_path);
 
     /* Update the file gid to add the time */
     char strtime[ARR_SIZE];
@@ -112,6 +106,13 @@ void tcell_store(MyInfo_t *my_info, int sock_fd, char *store_msg)
 
     strcat(file_desc.file_gid, "-");
     strcat(file_desc.file_gid, strtime);
+
+    /* Set the path of the file on the tcell */
+    char *tcell_files_path = get_tcell_files_path();
+    char buf_path[ARR_SIZE];
+    sprintf(buf_path, "%s/%s", tcell_files_path, file_desc.file_gid);
+    strcpy(file_desc.path, buf_path);
+    free(tcell_files_path);
 
     /* Insert a new entry in the database */
     if(insertFile(&file_desc) != 1)
