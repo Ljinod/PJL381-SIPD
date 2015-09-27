@@ -81,7 +81,7 @@ void send_msg_to(int sock_fd, const char* msg)
     }
 }
 
-const char* recv_msg_from(int sock_fd)
+char* recv_msg_from(int sock_fd)
 {
     int bytes_recv;
     char buffer[MSG_SIZE], *msg_recv;
