@@ -24,18 +24,13 @@ void tcell_store(MyInfo_t *my_info, int sock_fd, char *store_msg)
     FileDesc_t file_desc;
     char *msg_part, *field, *value, *msg_end;
 
-    fprintf(stdout, "[DEBUG] store_msg: %s\n", store_msg);
-
     msg_part = strtok_r(store_msg, MSG_SEP, &msg_end);
 
     /* Get the file description from the store message */
     while(msg_part != NULL)
     {
-        fprintf(stdout, "[DEBUG] msg_part: %s\n", msg_part);
-
         char *field_end;
         field = strtok_r(msg_part, FIELD_VALUE_SEP, &field_end);
-        fprintf(stdout, "[DEBUG] field: %s\n", field);
 
         if(field == NULL)
         {
@@ -46,7 +41,6 @@ void tcell_store(MyInfo_t *my_info, int sock_fd, char *store_msg)
 
         /* The field is not null we cant get a value */
         value = strtok_r(NULL, FIELD_VALUE_SEP, &field_end);
-        fprintf(stdout, "[DEBUG] value: %s\n", value);
 
         if(value == NULL)
         {
@@ -58,37 +52,30 @@ void tcell_store(MyInfo_t *my_info, int sock_fd, char *store_msg)
         if(strcmp(field, FIELD_FILE_GID) == 0)
         {
             strcpy(file_desc.file_gid, value);
-            fprintf(stdout, "[DEBUG] value read: %s\n", value);
         }
         else if(strcmp(field, FIELD_FILE_ID) == 0)
         {
             strcpy(file_desc.file_id, value);
-            fprintf(stdout, "[DEBUG] value read: %s\n", value);
         }
         else if(strcmp(field, FIELD_SIZE) == 0)
         {
             strcpy(file_desc.size, value);
-            fprintf(stdout, "[DEBUG] value read: %s\n", value);
         }
         else if(strcmp(field, FIELD_TYPE) == 0)
         {
             strcpy(file_desc.type, value);
-            fprintf(stdout, "[DEBUG] value read: %s\n", value);
         }
         else if(strcmp(field, FIELD_DESC) == 0)
         {
             strcpy(file_desc.description, value);
-            fprintf(stdout, "[DEBUG] value read: %s\n", value);
         }
         else if(strcmp(field, FIELD_SYM_KEY) == 0)
         {
             strcpy(file_desc.symmetric_key, value);
-            fprintf(stdout, "[DEBUG] value read: %s\n", value);
         }
         else if(strcmp(field, FIELD_IV) == 0)
         {
             strcpy(file_desc.initialisation_vector, value);
-            fprintf(stdout, "[DEBUG] value read: %s\n", value);
         }
 
 
