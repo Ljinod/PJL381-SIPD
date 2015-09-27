@@ -53,6 +53,9 @@
 #define ARR_SIZE   (256)
 #define CMD_SIZE   (512)
 #define MSG_SIZE   (2048)
+/* We create keys of 2048bits hence an array of 512 bytes should be enough
+ * (512 * 8 = 4096bits) */
+#define RSA_PUB_SIZE (512)
 
 static inline void print_error_info(const char *msg)
 {
