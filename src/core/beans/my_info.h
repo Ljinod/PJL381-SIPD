@@ -14,13 +14,15 @@
 #ifndef __MY_INFO_H__
 #define __MY_INFO_H__
 
+#include "../tools/utils.h"
+
 typedef struct MyInfo
 {
-    char my_gid[256];
-    char my_tcell_ip[256];
+    char my_gid[ARR_SIZE];
+    char my_tcell_ip[ARR_SIZE];
     int  my_tcell_port;
-    char my_public_key[256];
-    char my_private_key[256];
+    char my_public_key[ARR_SIZE];
+    char my_private_key[ARR_SIZE];
 } MyInfo_t;
 
 #endif
