@@ -124,9 +124,9 @@ void recv_file_from(int sock_fd, int file_size, const char *file_path)
     if(file_size > 0)
     {
         fprintf(stderr, "[WARNING] Maybe something happened while transfering:"
-                        "          %s\n"
-                        "          Apparently the transfer was not completed."
-                        "\n", file_path);
+                        " %s\n"
+                        "          Apparently the transfer was not completed: "
+                        "%i bytes missing.\n", file_path, file_size);
     }
 
     /* Close the file */
