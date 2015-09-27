@@ -22,7 +22,7 @@
  *
  * @return
  */
-const char* rsa_encrypt_msg(const char *pub_key_path, const char *msg)
+char* rsa_encrypt_msg(const char *pub_key_path, const char *msg)
 {
     char  cmd[CMD_SIZE];
     char *enc_msg = malloc(RSA_MSG_SIZE * sizeof(char));
@@ -63,7 +63,7 @@ const char* rsa_encrypt_msg(const char *pub_key_path, const char *msg)
  *
  * @return
  */
-const char* rsa_decrypt_msg(const char *priv_key_path, const char *enc_msg)
+char* rsa_decrypt_msg(const char *priv_key_path, const char *enc_msg)
 {
     char  cmd[CMD_SIZE];
     char *dec_msg = malloc(RSA_MSG_SIZE * sizeof(char));
@@ -97,6 +97,7 @@ const char* rsa_decrypt_msg(const char *priv_key_path, const char *enc_msg)
 
 void rsa_assert_ack(const char *priv_key_path, const char *enc_msg)
 {
-    const char *dec_ack = rsa_decrypt_msg(priv_key_path, enc_msg);
+    char *dec_ack = rsa_decrypt_msg(priv_key_path, enc_msg);
     assert(strcmp(MSG_ACK, dec_ack) == 0);
+    free(dec_ack);
 }

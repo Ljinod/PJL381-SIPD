@@ -9,7 +9,7 @@ int main(void)
     FileDesc_t file_desc;
     strcpy(file_desc.file_gid, "fakeGID");
     strcpy(file_desc.file_id, "fakeID");
-    file_desc.size = 9001;
+    strcpy(file_desc.size, "9001");
     strcpy(file_desc.type, "fakefile!");
     strcpy(file_desc.description, "A fake file which size is over 9000!");
     strcpy(file_desc.symmetric_key, "atotallyfakesymmetrickey");

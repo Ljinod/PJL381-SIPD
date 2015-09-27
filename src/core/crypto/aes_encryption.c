@@ -163,7 +163,7 @@ FileDesc_t* aes_encrypt_file(const char *file_path)
  *
  * @return
  */
-const char* aes_decrypt_file(FileDesc_t* enc_file_desc)
+char* aes_decrypt_file(FileDesc_t* enc_file_desc)
 {
     char cmd[CMD_SIZE], *dec_file_path = malloc(ARR_SIZE * sizeof(char));
 

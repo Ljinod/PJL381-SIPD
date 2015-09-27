@@ -20,7 +20,7 @@
  *
  * @return
  */
-const char* rsa_encrypt_msg(const char *pub_key_path, const char *msg);
+char* rsa_encrypt_msg(const char *pub_key_path, const char *msg);
 
 
 /**
@@ -31,7 +31,7 @@ const char* rsa_encrypt_msg(const char *pub_key_path, const char *msg);
  *
  * @return
  */
-const char* rsa_decrypt_msg(const char *priv_key_path, const char *enc_msg);
+char* rsa_decrypt_msg(const char *priv_key_path, const char *enc_msg);
 
 
 void rsa_assert_ack(const char *priv_key_path, const char *enc_msg);

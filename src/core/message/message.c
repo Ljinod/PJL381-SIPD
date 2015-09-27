@@ -14,12 +14,8 @@
 #include "../beans/file_desc.h"
 
 
-const char* create_store_message(const FileDesc_t* file_desc)
+char* create_store_message(const FileDesc_t* file_desc)
 {
-    /* Convert the size into a string */
-    char file_size[ARR_SIZE];
-    sprintf(file_size, "%i", file_desc->size);
-
     /* Create the string with the appropriate size */
     char *msg = malloc(sizeof(char) *
                        (1 +
@@ -34,7 +30,7 @@ const char* create_store_message(const FileDesc_t* file_desc)
 
                         /* file size, for checking purposes */
                         strlen(FIELD_SIZE)       + strlen(FIELD_VALUE_SEP) +
-                        strlen(file_size)                + strlen(MSG_SEP) +
+                        strlen(file_desc->size)          + strlen(MSG_SEP) +
 
                         /* file type, the field can be blank */
                         strlen(FIELD_TYPE)       + strlen(FIELD_VALUE_SEP) +
@@ -67,7 +63,7 @@ const char* create_store_message(const FileDesc_t* file_desc)
     strcat(msg, file_desc->file_id); strcat(msg, MSG_SEP);
 
     strcat(msg, FIELD_SIZE); strcat(msg, FIELD_VALUE_SEP);
-    strcat(msg, file_size); strcat(msg, MSG_SEP);
+    strcat(msg, file_desc->size); strcat(msg, MSG_SEP);
 
     strcat(msg, FIELD_TYPE); strcat(msg, FIELD_VALUE_SEP);
     strcat(msg, file_desc->type); strcat(msg, MSG_SEP);
@@ -86,7 +82,7 @@ const char* create_store_message(const FileDesc_t* file_desc)
 }
 
 
-const char* create_read_message(const char* file_gid)
+char* create_read_message(const char* file_gid)
 {
     char *msg = malloc(sizeof(char) *
                        (1 +
@@ -110,7 +106,7 @@ const char* create_read_message(const char* file_gid)
 }
 
 
-const char* create_list_files_message(void)
+char* create_list_files_message(void)
 {
     char *msg = malloc(sizeof(char) *
                        (1 +
@@ -125,4 +121,4 @@ const char* create_list_files_message(void)
 }
 
 
-const char* create_share_message(void);
+char* create_share_message(void);

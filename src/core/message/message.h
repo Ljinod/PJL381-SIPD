@@ -28,12 +28,12 @@
 
 #include "../beans/file_desc.h"
 
-const char* create_store_message(const FileDesc_t* file_desc);
+char* create_store_message(const FileDesc_t* file_desc);
 
-const char* create_read_message(const char* file_gid);
+char* create_read_message(const char* file_gid);
 
-const char* create_list_files_message(void);
+char* create_list_files_message(void);
 
-const char* create_share_message(void);
+char* create_share_message(void);
 
 #endif
