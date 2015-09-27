@@ -12,6 +12,7 @@
 #include <sys/sendfile.h>
 
 #include "../transfer_file.h"
+#include "../connection.h"
 
 #define PORT_NUMBER     5678
 #define SERVER_ADDRESS  "127.0.0.1"
@@ -66,6 +67,11 @@ int main(int argc, char **argv)
         exit(EXIT_FAILURE);
     }
     fprintf(stdout, "Accept peer --> %s\n", inet_ntoa(peer_addr.sin_addr));
+
+    const char *msg_recv = recv_msg_from(peer_socket);
+    fprintf(stdout, "Message received: %s\n", msg_recv);
+
+    send_msg_to(peer_socket, "OK");
 
     recv_file_from(peer_socket, 27, "transfered_text.txt");
     //recv_file_from(peer_socket, 29506658, "files/music.flac");

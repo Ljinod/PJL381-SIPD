@@ -15,6 +15,9 @@ int main(void)
     // strcpy(file_desc.path, "music.flac");
     // file_desc.size = 29506658;
 
+    send_msg_to(sock_fd, "This is a test!\n");
+    fprintf(stdout, "[TEST] Message received: %s\n", recv_msg_from(sock_fd));
+
     fprintf(stdout, "[TEST] Trying to send file - %s - to server.\n",
                     file_desc.path);
     send_file_to(sock_fd, &file_desc);

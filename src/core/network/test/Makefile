@@ -15,8 +15,8 @@ connection.o: ../connection.c $(HEADERS)
 transfer_file.o: ../transfer_file.c $(HEADERS)
 	$(CC) -c $< $(CFLAGS) -o $@
 
-server_test.exe: server_test.c transfer_file.o $(HEADERS)
-	$(CC) server_test.c transfer_file.o $(CFLAGS) -o $@
+server_test.exe: server_test.c $(OBJECTS) $(HEADERS)
+	$(CC) server_test.c $(OBJECTS) $(CFLAGS) -o $@
 
 .PHONY: clean
 

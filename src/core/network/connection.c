@@ -16,6 +16,8 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <unistd.h> /* close */
+#include <string.h> /* strlen */
+#include <stdlib.h>  /* exit */
 
 #include "connection.h"
 #include "../tools/utils.h"
@@ -49,10 +51,55 @@ int connect_to(const char *ip_addr, int port)
     /* Connect to server */
     if(connect(sock_fd, (struct sockaddr *)&server, sizeof(server)) < 0)
     {
-        print_error_info("[ERROR] Cannot connect to server");
+        print_error_info("[ERROR] Cannot connect to server.");
         close(sock_fd);
         exit(-1);
     }
 
     return sock_fd;
+}
+
+
+void send_msg_to(int sock_fd, const char* msg)
+{
+    int bytes_sent, msg_len = strlen(msg);
+    if(msg_len > MSG_SIZE)
+    {
+        fprintf(stderr, "[ERROR] Ohoh, it seems that you have reached the\n"
+                        "        limits of my program. The following message\n"
+                        "        was too long to be handled:\n%s\n", msg);
+        exit(-1);
+    }
+
+    if((bytes_sent = send(sock_fd, (const void*) msg, msg_len, 0)) != msg_len)
+    {
+        fprintf(stderr, "[ERROR] Could not send the message.\n"
+                        "        Message's length was: %i\n"
+                        "        Bytes sent          : %i\n",
+                        msg_len, bytes_sent);
+        exit(-1);
+    }
+}
+
+const char* recv_msg_from(int sock_fd)
+{
+    int bytes_recv;
+    char buffer[MSG_SIZE], *msg_recv;
+    memset(buffer, '\0', MSG_SIZE);
+
+    if((bytes_recv = recv(sock_fd, (void *)buffer, MSG_SIZE, 0)) == -1)
+    {
+        fprintf(stderr, "[ERROR] Could not receive the message sent.\n");
+        exit(-1);
+    }
+
+    fprintf(stdout, "[INFO] Received a message of %i bytes.\n", bytes_recv);
+
+    /* Allocate correct amount of memory for the message, the "+ 1" is because
+     * does not count the final '\0' character thus when copying if we don't
+     * add one the receiving array would be too short. */
+    msg_recv = malloc(sizeof(char) * (strlen(buffer) + 1));
+    strcpy(msg_recv, buffer);
+
+    return msg_recv;
 }
