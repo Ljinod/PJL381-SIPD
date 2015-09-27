@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdio.h> /* fprintf */
 
 #include "../aes_encryption.h"
 #include "../../beans/file_desc.h"
@@ -42,6 +42,13 @@ int main(void)
     const char *dec_msg =
         rsa_decrypt_msg("/home/julien/.config/sipd/keys/julien-sipd-rsa", enc_msg);
     fprintf(stdout, "[TEST] Decrypted message: %s\n", dec_msg);
+
+    fprintf(stdout, "[TEST] Asserting acknowledge....");
+    const char *enc_ack =
+        rsa_encrypt_msg("/home/julien/.config/sipd/keys/julien-sipd-rsa.pub", MSG_ACK);
+
+    rsa_assert_ack("/home/julien/.config/sipd/keys/julien-sipd-rsa", enc_ack);
+    fprintf(stdout, " Ok.\n");
 
     return 0;
 }

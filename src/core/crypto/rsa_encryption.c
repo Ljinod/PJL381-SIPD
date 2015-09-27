@@ -8,6 +8,7 @@
 
 #include <string.h> /* strcspn */
 #include <stdio.h> /* sprintf, fprintf */
+#include <assert.h> /* assert */
 
 #include "rsa_encryption.h"
 #include "../tools/utils.h"
@@ -93,3 +94,9 @@ const char* rsa_decrypt_msg(const char *priv_key_path, const char *enc_msg)
     return dec_msg;
 }
 
+
+void rsa_assert_ack(const char *priv_key_path, const char *enc_msg)
+{
+    const char *dec_ack = rsa_decrypt_msg(priv_key_path, enc_msg);
+    assert(strcmp(MSG_ACK, dec_ack) == 0);
+}
