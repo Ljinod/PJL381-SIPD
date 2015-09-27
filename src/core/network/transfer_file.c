@@ -57,11 +57,15 @@ void send_file_to(int sock_fd, FileDesc_t *file_desc)
     file_size = atoi(file_desc->size);
 
     /* Send it */
-    while((bytes_sent = sendfile(sock_fd, file_fd, &offset, BUFFER_SIZE)) > 0
-          && file_size > 0)
+    while(file_size > 0  &&
+          (bytes_sent = sendfile(sock_fd, file_fd, &offset, BUFFER_SIZE)) > 0)
     {
         /* XXX Can we display a % showing the advancement of the upload? */
         file_size -= bytes_sent;
+        fprintf(stdout, "[INFO] %d bytes sent - %d remaining\n", bytes_sent,
+                                                                 file_size);
+        if(file_size == 0)
+            break;
     }
 
     /* Check that we did send every last bytes of it. */
@@ -80,6 +84,8 @@ void send_file_to(int sock_fd, FileDesc_t *file_desc)
                         "        the file: %s\n", file_desc->path);
         exit(-1);
     }
+
+    fprintf(stdout, "[DEBUG] Send over!\n");
 }
 
 
@@ -110,12 +116,14 @@ void recv_file_from(int sock_fd, const char *file_size, const char *file_path)
     memset(buffer, '\0', BUFFER_SIZE);
 
     /* Receive the file, by blocks of BUFFER_SIZE */
-    while((bytes_recv = recv(sock_fd, buffer, BUFFER_SIZE, 0)) > 0
-          && i_file_size > 0)
+    while(i_file_size > 0 &&
+          (bytes_recv = recv(sock_fd, buffer, BUFFER_SIZE, 0)) > 0)
     {
         /* write what we received */
         fwrite(buffer, sizeof(char), bytes_recv, file_stream);
         i_file_size -= bytes_recv;
+        fprintf(stdout, "[INFO] %d bytes received - %d remaining\n",
+                        bytes_recv, i_file_size);
 
         /* Precautions precautions, clean the buffer */
         memset(buffer, '\0', BUFFER_SIZE);
@@ -137,5 +145,7 @@ void recv_file_from(int sock_fd, const char *file_size, const char *file_path)
                         "        the file: %s\n", file_path);
         exit(-1);
     }
+
+    fprintf(stdout, "[DEBUG] Recv over!\n");
 }
 

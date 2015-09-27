@@ -15,82 +15,13 @@
 #include <assert.h> /* assert */
 
 #include "../network/connection.h"
+#include "../network/transfer_file.h"
 #include "../tools/utils.h"
 #include "../message/message.h"
+#include "../crypto/aes_encryption.h"
+#include "../crypto/rsa_encryption.h"
+#include "api.h"
 
-
-/* ==================== LEGACY CODE ===========================================
- * ============================================================================
- * char* storeFileOnTCell(const char *file_path, const void *file_to_store,
- *                        int file_size)
- * {
- *   char *file_name         = basename((char *)file_path);
- *   char *filename_on_tcell = malloc(sizeof(char) * (strlen(TCELL_FILES_DIR) +
- *                                                    strlen(file_name) + 1));
- *   // We create the name
- *   strcpy(filename_on_tcell, TCELL_FILES_DIR);
- *   strcat(filename_on_tcell, file_name);
- *
- *   // We only store the file if it is not already on the TCell: we do not handle
- *   // updates in the database just yet.
- *   if(access(filename_on_tcell, F_OK) == -1)
- *   {
- *     // We create the file
- *     FILE *file_tcell = fopen(filename_on_tcell, "wb");
- *     if(file_tcell == NULL)
- *     {
- *       print_error_info("ERROR: daemon.c - could not create file on TCell.");
- *     }
- *
- *     // We write the content we just received
- *     int res = fwrite(file_to_store, 1, file_size, file_tcell);
- *     if(res != file_size)
- *     {
- *       print_error("ERROR: daemon.c - could not write file on TCell.");
- *       exit(EXIT_FAILURE);
- *     }
- *
- *     // We close the file
- *     if(fclose(file_tcell) != 0)
- *     {
- *       print_error_info("ERROR: daemon.c - could not close file on TCell.");
- *       fclose(file_tcell);
- *     }
- *   }
- *
- *   return filename_on_tcell;
- * }
- * ============================================================================
- * ============================================================================
- *  else if(strcmp(action, MSG_STORE) == 0)
- *  {
- *    fprintf(stdout, "INFO: STORE FILE DESCRIPTION action recieve\n");
- *    char *file_name = strtok(NULL, MSG_SEPARATOR);
- *    // Send first OK to client to get the symmetric key
- *    sendSock(sock, MSG_OK, PUB_KEY);
- *    // Receive symmetric key
- *    char *sym_key = recvSock(sock, PRIV_KEY);
- *
- *    FileDesc_t *file_desc = createFileDesc(file_name, file_name,
- *                                           sym_key, "", "");
- *    if(insertFile(file_desc) == 0)
- *    {
- *      print_error("ERROR: could not insert into database.");
- *      sendSock(sock, MSG_ERROR, PUB_KEY);
- *    }
- *    else
- *    {
- *      // Send OK to client: database successfully updated
- *      sendSock(sock, MSG_OK, PUB_KEY);
- *    }
- *
- *    // Free resources
- *    free(file_desc);
- *    free(sym_key);
- *  }
- * ============================================================================
- * ============================================================================
- */
 
 void store_file(MyInfo_t *my_info, const char *file_path)
 {
@@ -132,10 +63,9 @@ void store_file(MyInfo_t *my_info, const char *file_path)
     strcpy(file_desc->description, buffer);
 
     /* Create the store message */
-    const char *store_msg = create_store_message(file_desc);
+    char *store_msg = create_store_message(file_desc);
     /* Encrypt it with user's rsa public key */
-    const char *enc_store_msg = rsa_encrypt_msg(store_msg,
-                                                my_info->my_public_key);
+    char *enc_store_msg = rsa_encrypt_msg(my_info->my_public_key, store_msg);
     /* Send the store message to the tcell */
     send_msg_to(sock_tcell, enc_store_msg);
     /* Wait for the ack */
