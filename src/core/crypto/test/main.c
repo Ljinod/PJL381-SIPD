@@ -12,7 +12,7 @@ int main(void)
     {
         fprintf(stdout, "[TEST] File encrypted:\n");
         fprintf(stdout, "[TEST] FILE_ID: %s\n", f_desc->file_id);
-        fprintf(stdout, "[TEST] SIZE:    %i\n", f_desc->size);
+        fprintf(stdout, "[TEST] SIZE:    %s\n", f_desc->size);
         fprintf(stdout, "[TEST] PATH:    %s\n", f_desc->path);
         fprintf(stdout, "[TEST] SYM_KEY: %s\n", f_desc->symmetric_key);
         fprintf(stdout, "[TEST] IV:      %s\n", f_desc->initialisation_vector);

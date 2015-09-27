@@ -1,6 +1,6 @@
 // ============================================================================
 //
-//       Filename:  my_info.h
+//       Filename:  user.h
 //         Author:  Loudet  Julien
 //          Email:  julien.loudet@telecom-paristech.fr
 //                  loudet.julien@gmail.com
@@ -11,18 +11,17 @@
 //
 // ============================================================================
 
-#ifndef __MY_INFO_H__
-#define __MY_INFO_H__
+#ifndef __USER_H__
+#define __USER_H__
 
 #include "../tools/utils.h"
 
-typedef struct MyInfo
+typedef struct User
 {
-    char my_gid[ARR_SIZE];
-    char my_tcell_ip[ARR_SIZE];
-    char my_tcell_port[ARR_SIZE];
-    char my_public_key[ARR_SIZE];
-    char my_private_key[ARR_SIZE];
-} MyInfo_t;
+    char user_gid[ARR_SIZE];
+    char tcell_ip[ARR_SIZE];
+    char tcell_port[ARR_SIZE];
+    char public_key[ARR_SIZE];
+} User_t;
 
 #endif

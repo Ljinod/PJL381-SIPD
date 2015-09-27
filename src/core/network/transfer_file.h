@@ -21,7 +21,7 @@ void send_file_to(int sock_fd, FileDesc_t* file_desc);
  * @param sock_fd   The socket through which the file is sent.
  * @param file_path The path of the file that will be created.
  */
-void recv_file_from(int sock_fd, int file_size, const char *file_path);
+void recv_file_from(int sock_fd, const char *file_size, const char *file_path);
 
 #endif
 

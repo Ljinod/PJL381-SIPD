@@ -25,7 +25,7 @@
 const char* rsa_encrypt_msg(const char *pub_key_path, const char *msg)
 {
     char  cmd[CMD_SIZE];
-    char *enc_msg = malloc(RSA_SIZE * sizeof(char));
+    char *enc_msg = malloc(RSA_MSG_SIZE * sizeof(char));
 
     /* XXX Explain command! */
     sprintf(cmd, "echo \"%s\" | openssl rsautl -encrypt -pubin "
@@ -36,7 +36,7 @@ const char* rsa_encrypt_msg(const char *pub_key_path, const char *msg)
 
     /* Since we asked to convert the output in base64 on one line we only
      * need to do fgets once */
-    if(fgets(enc_msg, RSA_SIZE, enc_msg_stream) != NULL)
+    if(fgets(enc_msg, RSA_MSG_SIZE, enc_msg_stream) != NULL)
     {
         /* Remove newline character */
         enc_msg[strcspn(enc_msg, "\n")] = '\0';
@@ -66,7 +66,7 @@ const char* rsa_encrypt_msg(const char *pub_key_path, const char *msg)
 const char* rsa_decrypt_msg(const char *priv_key_path, const char *enc_msg)
 {
     char  cmd[CMD_SIZE];
-    char *dec_msg = malloc(RSA_SIZE * sizeof(char));
+    char *dec_msg = malloc(RSA_MSG_SIZE * sizeof(char));
 
     /* XXX Explain command! */
     sprintf(cmd, "echo \"%s\" | openssl enc -base64 -A -d | "
@@ -76,7 +76,7 @@ const char* rsa_decrypt_msg(const char *priv_key_path, const char *enc_msg)
     FILE *dec_msg_stream = popen((const char *)cmd, "r");
 
     /* Once again through the -A option the output is only on one line */
-    if(fgets(dec_msg, RSA_SIZE, dec_msg_stream) != NULL)
+    if(fgets(dec_msg, RSA_MSG_SIZE, dec_msg_stream) != NULL)
     {
         /* Remove newline character */
         dec_msg[strcspn(dec_msg, "\n")] = '\0';

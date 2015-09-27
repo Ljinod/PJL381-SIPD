@@ -9,7 +9,8 @@
 #ifndef __RSA_ENCRYPTION_H__
 #define __RSA_ENCRYPTION_H__
 
-#define RSA_SIZE (1024)
+#define RSA_MSG_SIZE (1024)
+
 
 /**
  * @brief XXX Add brief description!

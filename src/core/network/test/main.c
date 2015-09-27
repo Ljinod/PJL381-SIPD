@@ -8,12 +8,12 @@
 int main(void)
 {
     fprintf(stdout, "[TEST] Trying to connect to server.\n");
-    int sock_fd = connect_to("127.0.0.1", 5678);
+    int sock_fd = connect_to("127.0.0.1", "5678");
     FileDesc_t file_desc;
-    strcpy(file_desc.path, "text.txt");
-    file_desc.size = 27;
-    // strcpy(file_desc.path, "music.flac");
-    // file_desc.size = 29506658;
+    // strcpy(file_desc.path, "text.txt");
+    // strcpy(file_desc.size, "27");
+    strcpy(file_desc.path, "music.flac");
+    strcpy(file_desc.size, "29506658");
 
     send_msg_to(sock_fd, "This is a test!\n");
     fprintf(stdout, "[TEST] Message received: %s\n", recv_msg_from(sock_fd));

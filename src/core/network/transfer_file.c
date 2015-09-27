@@ -26,6 +26,7 @@
 #include <stdio.h>        /* fprintf, fwrite, fopen */
 #include <sys/socket.h>   /* recv */
 #include <string.h>       /* memset */
+#include <stdlib.h>       /* atoi */
 
 
 
@@ -53,7 +54,7 @@ void send_file_to(int sock_fd, FileDesc_t *file_desc)
     }
 
     /* Get the file size */
-    file_size = file_desc->size;
+    file_size = atoi(file_desc->size);
 
     /* Send it */
     while((bytes_sent = sendfile(sock_fd, file_fd, &offset, BUFFER_SIZE)) > 0
@@ -91,9 +92,9 @@ void send_file_to(int sock_fd, FileDesc_t *file_desc)
  * @param file_size The size of the file.
  * @param file_path The path of the file to create.
  */
-void recv_file_from(int sock_fd, int file_size, const char *file_path)
+void recv_file_from(int sock_fd, const char *file_size, const char *file_path)
 {
-    int   bytes_recv;
+    int   bytes_recv, i_file_size = atoi(file_size);
     char  buffer[BUFFER_SIZE];
     FILE *file_stream;
 
@@ -110,23 +111,23 @@ void recv_file_from(int sock_fd, int file_size, const char *file_path)
 
     /* Receive the file, by blocks of BUFFER_SIZE */
     while((bytes_recv = recv(sock_fd, buffer, BUFFER_SIZE, 0)) > 0
-          && file_size > 0)
+          && i_file_size > 0)
     {
         /* write what we received */
         fwrite(buffer, sizeof(char), bytes_recv, file_stream);
-        file_size -= bytes_recv;
+        i_file_size -= bytes_recv;
 
         /* Precautions precautions, clean the buffer */
         memset(buffer, '\0', BUFFER_SIZE);
     }
 
     /* Check that we received everything */
-    if(file_size > 0)
+    if(i_file_size > 0)
     {
         fprintf(stderr, "[WARNING] Maybe something happened while transfering:"
                         " %s\n"
                         "          Apparently the transfer was not completed: "
-                        "%i bytes missing.\n", file_path, file_size);
+                        "%i bytes missing.\n", file_path, i_file_size);
     }
 
     /* Close the file */
