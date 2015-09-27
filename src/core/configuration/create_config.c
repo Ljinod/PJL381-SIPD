@@ -137,7 +137,7 @@ MyInfo_t* create_user_configuration_file(const char *config_file_path)
         char priv_key_filename[ARR_SIZE], cmd[ARR_SIZE];
         sprintf(priv_key_filename, "%s/.config/sipd/keys/%s", getenv("HOME"),
                 buffer);
-        sprintf(cmd, "openssl genrsa -out %s -aes256 2048", priv_key_filename);
+        sprintf(cmd, "openssl genrsa -out %s 2048", priv_key_filename);
         /* Launch command to create the private key. */
         rc = system(cmd); if(rc != 0) { goto error; }
         /* Add the private key path to the XML. */
