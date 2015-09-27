@@ -28,7 +28,8 @@ int main(int argc, char **argv)
     my_info = ask_user_configuration_file();
 
     /* Now we try to send a file to the tcell */
-    store_file(my_info, "/home/julien/dev/OpenSSL/music.flac");
+    // store_file(my_info, "/home/julien/dev/OpenSSL/music.flac");
+    list_files(my_info);
 
     return 0;
 }

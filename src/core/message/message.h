@@ -34,6 +34,8 @@ char* create_read_message(const char* file_gid);
 
 char* create_list_files_message(void);
 
+char* create_file_desc_message(const FileDesc_t* files_desc);
+
 char* create_share_message(void);
 
 #endif

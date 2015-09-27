@@ -139,14 +139,19 @@ void *connection_handler(void *socket_fd)
     {
         tcell_store(my_info, sock, copy_client_msg);
     }
+    else if(strcmp(action, ACT_LIST_FILES) == 0)
+    {
+        tcell_list_files(my_info, sock);
+    }
     else
     {
         print_error("[ERROR] tcelld: Unknown action requested.");
-        exit(EXIT_FAILURE);
     }
 
     /* Free resources */
     free(client_msg);
+    close(sock);
+
     return 0;
 }
 

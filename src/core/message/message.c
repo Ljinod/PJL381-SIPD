@@ -120,5 +120,37 @@ char* create_list_files_message(void)
     return msg;
 }
 
+char* create_file_desc_message(const FileDesc_t *file_desc)
+{
+    char *msg = malloc(sizeof(char) *
+                       (strlen(FIELD_FILE_GID) + strlen(FIELD_VALUE_SEP) +
+                        strlen(file_desc->file_gid) + strlen(MSG_SEP) +
+                        strlen(FIELD_FILE_ID)  + strlen(FIELD_VALUE_SEP) +
+                        strlen(file_desc->file_id)  + strlen(MSG_SEP) +
+                        strlen(FIELD_TYPE)     + strlen(FIELD_VALUE_SEP) +
+                        strlen(file_desc->type)     + strlen(MSG_SEP) +
+                        strlen(FIELD_DESC)     + strlen(FIELD_VALUE_SEP) +
+                        strlen(file_desc->description) + 1));
+
+    strcpy(msg, FIELD_FILE_GID);
+    strcat(msg, FIELD_VALUE_SEP);
+    strcat(msg, file_desc->file_gid);
+    strcat(msg, MSG_SEP);
+    strcat(msg, FIELD_FILE_ID);
+    strcat(msg, FIELD_VALUE_SEP);
+    strcat(msg, file_desc->file_id);
+    strcat(msg, MSG_SEP);
+    strcat(msg, FIELD_TYPE);
+    strcat(msg, FIELD_VALUE_SEP);
+    strcat(msg, file_desc->type);
+    strcat(msg, MSG_SEP);
+    strcat(msg, FIELD_DESC);
+    strcat(msg, FIELD_VALUE_SEP);
+    strcat(msg, file_desc->description);
+    strcat(msg, MSG_SEP);
+
+    return msg;
+}
+
 
 char* create_share_message(void);
