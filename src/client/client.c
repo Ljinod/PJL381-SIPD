@@ -29,7 +29,9 @@ int main(int argc, char **argv)
 
     /* Now we try to send a file to the tcell */
     // store_file(my_info, "/home/julien/dev/OpenSSL/music.flac");
-    list_files(my_info);
+    //list_files(my_info);
+
+    read_file(my_info, "julien-music.flac-201592722561");
 
     return 0;
 }

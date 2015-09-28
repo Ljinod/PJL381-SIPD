@@ -32,6 +32,8 @@ char* create_store_message(const FileDesc_t* file_desc);
 
 char* create_read_message(const char* file_gid);
 
+char* create_recv_file_message(FileDesc_t* file_desc);
+
 char* create_list_files_message(void);
 
 char* create_file_desc_message(const FileDesc_t* files_desc);

@@ -8,7 +8,7 @@ HEADERS = ../../core/network/connection.h ../../core/network/transfer_file.h \
 
 OBJECTS = connection.o transfer_file.o configuration.o store_file.o \
 		  create_config.o parse_config.o aes_encryption.o rsa_encryption.o \
-		  message.o list_files.o
+		  message.o list_files.o read_file.o
 
 CC           = gcc
 EXEC         = sipdc.exe
@@ -49,6 +49,9 @@ store_file.o: ../../core/api/store_file.c $(HEADERS)
 	$(CC) -c $< $(CFLAGS) -o $@
 
 list_files.o: ../../core/api/list_files.c $(HEADERS)
+	$(CC) -c $< $(CFLAGS) -o $@
+
+read_file.o: ../../core/api/read_file.c $(HEADERS)
 	$(CC) -c $< $(CFLAGS) -o $@
 
 clean:

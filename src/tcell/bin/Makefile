@@ -7,7 +7,7 @@ HEADERS = ../../core/beans/my_info.h ../../core/configuration/configuration.h \
 OBJECTS = configuration.o create_config.o parse_config.o connection.o \
 		  rsa_encryption.o tcell_store.o database_operations.o \
 		  string_operations.o transfer_file.o create_database.o \
-		  tcell_list_files.o message.o
+		  tcell_list_files.o message.o tcell_read_file.o
 
 CC           = gcc
 EXEC         = tcelld.exe
@@ -49,6 +49,9 @@ tcell_store.o: ../tcell_store.c $(HEADERS)
 	$(CC) -c $< $(CFLAGS) $(POSIX_DEF) -o $@
 
 tcell_list_files.o: ../tcell_list_files.c $(HEADERS)
+	$(CC) -c $< $(CFLAGS) $(POSIX_DEF) -o $@
+
+tcell_read_file.o: ../tcell_read_file.c $(HEADERS)
 	$(CC) -c $< $(CFLAGS) $(POSIX_DEF) -o $@
 
 database_operations.o: ../../database/database_operations.c $(HEADERS)

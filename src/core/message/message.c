@@ -82,7 +82,7 @@ char* create_store_message(const FileDesc_t* file_desc)
 }
 
 
-char* create_read_message(const char* file_gid)
+char* create_read_message(const char *file_gid)
 {
     char *msg = malloc(sizeof(char) *
                        (1 +
@@ -102,6 +102,40 @@ char* create_read_message(const char* file_gid)
     strcat(msg, file_gid);
 
     /* Message complete! */
+    return msg;
+}
+
+
+char* create_recv_file_message(FileDesc_t *file_desc)
+{
+    char *msg = malloc(sizeof(char) *
+                       (1 + strlen(FIELD_FILE_ID) + strlen(FIELD_VALUE_SEP) +
+                        strlen(file_desc->file_id) + strlen(MSG_SEP) +
+                        strlen(FIELD_SIZE) + strlen(FIELD_VALUE_SEP) +
+                        strlen(file_desc->size) + strlen(MSG_SEP) +
+                        strlen(FIELD_SYM_KEY) + strlen(FIELD_VALUE_SEP) +
+                        strlen(file_desc->symmetric_key) + strlen(MSG_SEP) +
+                        strlen(FIELD_IV) + strlen(FIELD_VALUE_SEP) +
+                        strlen(file_desc->initialisation_vector)
+                        )
+                      );
+
+    strcpy(msg, FIELD_FILE_ID);
+    strcat(msg, FIELD_VALUE_SEP);
+    strcat(msg, file_desc->file_id);
+    strcat(msg, MSG_SEP);
+    strcat(msg, FIELD_SIZE);
+    strcat(msg, FIELD_VALUE_SEP);
+    strcat(msg, file_desc->size);
+    strcat(msg, MSG_SEP);
+    strcat(msg, FIELD_SYM_KEY);
+    strcat(msg, FIELD_VALUE_SEP);
+    strcat(msg, file_desc->symmetric_key);
+    strcat(msg, MSG_SEP);
+    strcat(msg, FIELD_IV);
+    strcat(msg, FIELD_VALUE_SEP);
+    strcat(msg, file_desc->initialisation_vector);
+
     return msg;
 }
 

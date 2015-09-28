@@ -15,4 +15,6 @@ void store_file(MyInfo_t *my_info, const char *file_path);
 
 void list_files(MyInfo_t *my_info);
 
+void read_file(MyInfo_t *my_info, const char *file_gid);
+
 #endif

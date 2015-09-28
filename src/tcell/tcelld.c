@@ -143,6 +143,10 @@ void *connection_handler(void *socket_fd)
     {
         tcell_list_files(my_info, sock);
     }
+    else if(strcmp(action, ACT_READ) == 0)
+    {
+        tcell_read_file(my_info, sock, copy_client_msg);
+    }
     else
     {
         print_error("[ERROR] tcelld: Unknown action requested.");

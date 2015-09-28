@@ -19,6 +19,8 @@ void tcell_store(MyInfo_t *my_info, int sock_fd, char *store_msg);
 
 void tcell_list_files(MyInfo_t *my_info, int sock_fd);
 
+void tcell_read_file(MyInfo_t *my_info, int sock_fd, const char *read_msg);
+
 
 static inline char* get_tcell_files_path(void)
 {
