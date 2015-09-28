@@ -64,8 +64,9 @@ void list_files(MyInfo_t *my_info)
 
             if(field == NULL)
             {
-                fprintf(stderr, "[ERROR] An error occurred while decrypting the "
-                        "        message. Unable to process it.\n");
+                fprintf(stderr, "[ERROR] An error occurred while decrypting "
+                                "        the message. Unable to process it.\n"
+                                );
                 exit(-1);
             }
 

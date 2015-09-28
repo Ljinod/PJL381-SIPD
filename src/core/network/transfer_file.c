@@ -84,8 +84,6 @@ void send_file_to(int sock_fd, FileDesc_t *file_desc)
                         "        the file: %s\n", file_desc->path);
         exit(-1);
     }
-
-    fprintf(stdout, "[DEBUG] Send over!\n");
 }
 
 
@@ -145,7 +143,5 @@ void recv_file_from(int sock_fd, const char *file_size, const char *file_path)
                         "        the file: %s\n", file_path);
         exit(-1);
     }
-
-    fprintf(stdout, "[DEBUG] Recv over!\n");
 }
 

@@ -93,8 +93,6 @@ char* recv_msg_from(int sock_fd)
         exit(-1);
     }
 
-    fprintf(stdout, "[INFO] Received a message of %i bytes.\n", bytes_recv);
-
     /* Allocate correct amount of memory for the message, the "+ 1" is because
      * does not count the final '\0' character thus when copying if we don't
      * add one the receiving array would be too short. */
