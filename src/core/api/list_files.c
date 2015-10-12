@@ -1,9 +1,13 @@
 /**
  * @file    list_files.c
- * @brief   XXX Add brief description!
+ * @brief   List all the files stored on the tcell.
  * @author  Loudet Julien
  * @version 1.1
  * @date    2015-09
+ *
+ * @details (last edited on 2015-10-13 by Loudet Julien
+ *           -- added comments)
+ *
  */
 
 #include <string.h> /* strtok */
@@ -15,6 +19,27 @@
 #include "../crypto/rsa_encryption.h"
 
 
+/**
+ * @brief Asks the tcell the list of all the files stored.
+ *
+ * @param my_info The user's information as defined in the xml configuration
+ *                file.
+ *
+ * @details This function first asks the tcell to give the list of all the
+ *          files that were stored.
+ *
+ *          The protocole used is as following:
+ *          (1) the client tries to connect to the tcell. If the connection
+ *          attempt fails, it exits;
+ *          (2) the client sends a "list files" message to the tcell;
+ *          (3) the client waits for an acknowledge from the tcell;
+ *          (4) the client receives the number of file descriptions the tcell
+ *          is going to send then sends an acknowledge;
+ *          (5) the client receives the file descriptions one by one and print
+ *          them as they arrive - sending an ackowledge every time one was
+ *          received and processed;
+ *          (6) if everything went well the client prints "Done!" and exits.
+ */
 void list_files(MyInfo_t *my_info)
 {
     /* Establish a connection to the tcell */
