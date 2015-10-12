@@ -4,6 +4,9 @@
  * @author  Loudet Julien
  * @version 1.1
  * @date    2015-09
+ *
+ * @details (last edited on 2015-10-13 by Loudet Julien
+ *           -- added comments)
  */
 
 #include <stdlib.h> /* free */
@@ -17,6 +20,47 @@
 #include "api.h"
 
 
+/**
+ * @brief Asks the tcell for a file.
+ *
+ * @details This function asks the tcell for a file it stored.
+ *
+ *          The protocole used is a following:
+ *          (1) the function tries to connect to the tcell, if the connection
+ *          attempt fails it exits;
+ *          (2) it sends a "read message" to the tcell;
+ *          (3) it waits for an acknowledge from the tcell signaling
+ *          that the request was understood - i.e. the file gid provided is
+ *          correct;
+ *          (4) it asks the tcell to start the transfer;
+ *          (5) it receives the file description containing all the
+ *          information needed to decrypt the file;
+ *          (6) it sends an ackowledge to the tcell which triggers the
+ *          transfer of the file;
+ *          (7) it stores the file on a temporary location for it to be
+ *          decrypted;
+ *          (8) it decrypts the file and stores the result in the
+ *          folder containing the files received from the tcell;
+ *          (9) if everything went well a message is printed giving the path of
+ *          the decrypted file.
+ *
+ *          NB: the (4) part of the protocole is necessary because of the way
+ *          the sockets work: the size of the message to receive must be
+ *          specified and, so that we receive it entirely, usually the size
+ *          given to the "recv" function is greater than the actual size of the
+ *          message.
+ *          This has a consequence: the "recv" blocks until it's received size
+ *          bytes; so if we want to not mix the messages we must use one trick:
+ *          once the message was sent the sender must then wait for a message.
+ *          This forces the exit of the blocking state of the receiver because
+ *          both ends of a socket cannot be receiving at the same time.
+ *
+ *
+ * @param my_info The user's information as defined in the xml configuration
+ *                file.
+ * @param file_gid The file's unique identifier. One can get this id after a
+ *                 call to the function list_file.
+ */
 void read_file(MyInfo_t *my_info, const char *file_gid)
 {
     /* Connect to the tcell */
