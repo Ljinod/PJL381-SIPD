@@ -1,13 +1,13 @@
 HEADERS = ../../core/beans/my_info.h ../../core/configuration/configuration.h \
-		  ../../core/tools/utils.h ../../core/network/connection.h \
-		  ../../core/crypto/rsa_encryption.h ../../core/message/message.h \
-		  ../../core/configuration/create_config.h ../tcell.h \
-		  ../../core/configuration/parse_config.h ../../database/database.h
+	../../core/tools/utils.h ../../core/network/connection.h \
+	../../core/crypto/rsa_encryption.h ../../core/message/message.h \
+	../../core/configuration/create_config.h ../tcell.h \
+	../../core/configuration/parse_config.h ../../database/database.h
 
 OBJECTS = configuration.o create_config.o parse_config.o connection.o \
-		  rsa_encryption.o tcell_store.o database_operations.o \
-		  string_operations.o transfer_file.o create_database.o \
-		  tcell_list_files.o message.o tcell_read_file.o
+	rsa_encryption.o tcell_store.o database_operations.o \
+	string_operations.o transfer_file.o create_database.o \
+	tcell_list_files.o message.o tcell_read_file.o
 
 CC           = gcc
 EXEC         = tcelld.exe
