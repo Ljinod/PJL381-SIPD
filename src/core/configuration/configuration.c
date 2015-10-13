@@ -7,7 +7,8 @@
  *
  * @details (last edited by Loudet Julien on 2015-10-13
  *           -- updated comments
- *           -- implemented the )
+ *           -- fixed access test to check for read right as well
+ *           -- implemented the "load a custom configuration file" part)
  */
 
 #include <stdio.h> /* sprintf, fprintf */
@@ -23,6 +24,7 @@
 
 /**
  * @brief   Ask the user for hers/his configuration file.
+ *
  * @details The configuration file hold the information later used by the
  *          program.
  *
@@ -33,6 +35,10 @@
  *          If the user asked to use the default configuration file but it does
  *          not exist then the program creates one. It will ask questions to
  *          the user in order to fill in the required fields.
+ *
+ *          In all cases a pointer on a MyInfo structure is returned which is
+ *          NULL if an error occurred.
+ *
  *
  * @return MyInfo_t The structure that will hold the user's information or NULL
  *         on failure.
