@@ -1,42 +1,38 @@
 /**
  * @file    configuration.c
- * @brief   XXX Add brief description!
+ * @brief   Ask or create a configuration file.
  * @author  Loudet Julien <loudet.julien@gmail.com>
  * @version 1.1
  * @date    2015-04
  *
- * @details (last edited by Loudet Julien on 2015/09)
+ * @details (last edited by Loudet Julien on 2015-10-13
+ *           -- updated comments
+ *           -- implemented the )
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h> /**< For the "access" function */
+#include <stdio.h> /* sprintf, fprintf */
+#include <stdlib.h> /* getenv */
+#include <string.h> /* memset */
+#include <unistd.h> /* access */
 
 #include "configuration.h"
-#include "create_config.h" /**< "create_user_configuration_file" function" */
-#include "parse_config.h" /**< "parse_configuration_file" function */
-#include "../tools/utils.h" /**< "get_user_input", "ARR_SIZE" */
+#include "create_config.h"
+#include "parse_config.h"
+#include "../tools/utils.h"
 
 
 /**
  * @brief   Ask the user for hers/his configuration file.
  * @details The configuration file hold the information later used by the
- *          program. These information are:
- *          - the ip address of the user's tcell
- *          - the port of the user's tcell
- *          - the user's global identification
- *          - the location of the private key in the system
- *          - the location of the public key in the system
+ *          program.
+ *
  *          First the program asks if it should load the default configuration
  *          file. If the users answers no (s)he can provide an alternative path
  *          for a custom configuration file.
- *          If no configuration file exists then the program creates one based
- *          on the answers given by the user. If the user does not provide a
- *          pair of public/private keys the program will create one.
  *
- *          XXX What happens if the user deletes the folders used for storing
- *          the configuration files?
+ *          If the user asked to use the default configuration file but it does
+ *          not exist then the program creates one. It will ask questions to
+ *          the user in order to fill in the required fields.
  *
  * @return MyInfo_t The structure that will hold the user's information or NULL
  *         on failure.
