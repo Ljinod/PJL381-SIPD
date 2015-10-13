@@ -49,6 +49,9 @@ MyInfo_t* ask_user_configuration_file(void)
     /* To store the user's input */
     char buffer[ARR_SIZE];
 
+
+beginning:
+
     /* Default config file path */
     memset(buffer, '\0', ARR_SIZE);
     sprintf(buffer, "%s/.config/sipd/my_info.xml", getenv("HOME"));
@@ -80,8 +83,18 @@ MyInfo_t* ask_user_configuration_file(void)
     {
         get_user_input(buffer, ARR_SIZE, "Enter the path of the custom "
                                           "configuration file: ");
-        /* XXX parse the custom configuration file if it exists */
-        my_info = NULL;
+
+        /* we check that the file exists */
+        if(access(buffer, R_OK) != 0)
+        {
+            fprintf(stderr, "[ERROR] I'm sorry the file you specified does\n"
+                            "        not exist or you do not have the\n"
+                            "        permission to read it. Starting over.\n");
+            goto beginning;
+        }
+
+        /* file does exist, parse it! */
+        my_info = parse_configuration_file(buffer);
     }
 
     return my_info;
