@@ -1,13 +1,14 @@
 /**
  * @file    store_file.c
  * @brief   Store a file.
- * @author  Loudet Julien <loudet.julien@gmail.com>
+ * @author  Loudet Julien    <loudet.julien@gmail.com>
  * @author  Maire   Stéphane <stephane.maire@telecom-paristech.org>
  * @author  Sabbagh Cyril    <cyril.sabbagh@telecom-paristech.org>
  * @version 1.1
  * @date    2015-04
  *
- * @details (Last edited by Loudet Julien on 2015/09)
+ * @details (last edited by Loudet Julien on 2015-10-13
+ *           -- added comments)
  */
 
 #include <stdio.h> /* sprintf */
@@ -23,6 +24,26 @@
 #include "api.h"
 
 
+/**
+ * @brief Store a file on the tcell.
+ *
+ * @details The protocole used is as following:
+ *          (1) The function tries to connect to the tcell, if the connection
+ *          attempt fails it exits;
+ *          (2) it encrypts the file to store;
+ *          (3) it sends the tcell a "store message" which contains a
+ *          description of the file;
+ *          (4) it waits for an acknowledge from the tcell, signalling that the
+ *          tcell receives the file information correctly and that it does not
+ *          already have an entry in the database for that particular file;
+ *          (5) it transfers the file;
+ *          (6) it waits for a final acknowledge from the tcell to ensure that
+ *          the transfer ended correctly.
+ *
+ * @param my_info The user's information as defined in the xml configuration
+ *                file.
+ * @param file_path The path of the file to store.
+ */
 void store_file(MyInfo_t *my_info, const char *file_path)
 {
     /* Establish a connection to the tcell: we do it now because if we can't

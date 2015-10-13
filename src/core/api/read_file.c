@@ -1,7 +1,9 @@
 /**
  * @file    read_file.c
  * @brief   Ask the tcell for a file.
- * @author  Loudet Julien
+ * @author  Loudet Julien    <loudet.julien@gmail.com>
+ * @author  Maire   Stéphane <stephane.maire@telecom-paristech.org>
+ * @author  Sabbagh Cyril    <cyril.sabbagh@telecom-paristech.org>
  * @version 1.1
  * @date    2015-09
  *
@@ -23,9 +25,7 @@
 /**
  * @brief Asks the tcell for a file.
  *
- * @details This function asks the tcell for a file it stored.
- *
- *          The protocole used is a following:
+ * @details The protocole used is a following:
  *          (1) the function tries to connect to the tcell, if the connection
  *          attempt fails it exits;
  *          (2) it sends a "read message" to the tcell;

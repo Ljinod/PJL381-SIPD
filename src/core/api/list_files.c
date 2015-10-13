@@ -1,7 +1,9 @@
 /**
  * @file    list_files.c
  * @brief   List all the files stored on the tcell.
- * @author  Loudet Julien
+ * @author  Loudet Julien    <loudet.julien@gmail.com>
+ * @author  Maire   Stéphane <stephane.maire@telecom-paristech.org>
+ * @author  Sabbagh Cyril    <cyril.sabbagh@telecom-paristech.org>
  * @version 1.1
  * @date    2015-09
  *
@@ -20,15 +22,12 @@
 
 
 /**
- * @brief Asks the tcell the list of all the files stored.
+ * @brief Asks the tcell for the list of all the files stored.
  *
  * @param my_info The user's information as defined in the xml configuration
  *                file.
  *
- * @details This function asks the tcell to give the list of all the files that
- *          were stored.
- *
- *          The protocole used is as following:
+ * @details The protocole used is as following:
  *          (1) the function tries to connect to the tcell. If the connection
  *          attempt fails, it exits;
  *          (2) it sends a "list files" message to the tcell;
