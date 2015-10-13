@@ -64,7 +64,7 @@ MyInfo_t* ask_user_configuration_file(void)
     {
         /* Test if my_info.xml exists, if the return value is not 0 then the
          * file does not exist */
-        if(access(buffer, F_OK) != 0)
+        if(access(buffer, R_OK) != 0)
         {
             /* File does not exist, we create it */
             my_info = create_user_configuration_file(buffer);
