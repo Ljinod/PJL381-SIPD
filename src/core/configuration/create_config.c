@@ -1,21 +1,27 @@
 /**
- * @file create_config.c
- * @brief   XXX Add brief description!
+ * @file    create_config.c
+ * @brief   Create a configuration file
  * @author  Loudet Julien <loudet.julien@gmail.com>
  * @version 1.1
- * @date 2015-09
+ * @date    2015-09
+ *
+ * @details (last edited by Loudet Julien on 2015-10-14
+ *           -- updated comments)
  */
+
+
 #include <libxml/encoding.h>
 #include <libxml/xmlwriter.h>
 
 #include "create_config.h"
-#include "configuration.h" /**< For the #define */
-#include "../beans/my_info.h" /**< MyInfo_t structure */
-#include "../tools/utils.h" /**< For the "get_user_input" function */
+#include "configuration.h"
+#include "../beans/my_info.h"
+#include "../tools/utils.h"
 
 
 /**
  * @brief   Creates a configuration file for the user.
+ *
  * @details This function will ask the user the required information in order
  *          to use the SIPD (see ask_user_configuration_file for a detailed
  *          list of those information).
@@ -30,15 +36,17 @@
  *          information provided.
  *
  *          ===================================================================
- *          TO BE DONE
+ *          TODO
  *          ===================================================================
- *          XXX Duplicate RSA keys for the tcell? Or the client and the tcell
+ *          - Duplicate RSA keys for the tcell? Or the client and the tcell
  *          both use the same configuration file?
- *          XXX Verify if RSA keys do exist before adding them?
+ *          - Verify if RSA keys do exist before adding them?
+ *
  *
  * @param config_file_path The path were the file will be created.
  *
- * @return my_info The structure holding the user's information.
+ * @return The structure holding the user's information or NULL if an error
+ *         occurred.
  */
 MyInfo_t* create_user_configuration_file(const char *config_file_path)
 {
@@ -144,7 +152,7 @@ MyInfo_t* create_user_configuration_file(const char *config_file_path)
         rc = xmlTextWriterWriteElement(writer, BAD_CAST PRIV_KEY_PATH,
                                          BAD_CAST priv_key_filename);
         if (rc < 0) { goto error_write_attribute; }
-        strcpy(my_info->my_private_key, priv_key_filename); /* Update my_info */
+        strcpy(my_info->my_private_key, priv_key_filename); /* Update info */
 
         /* Generation of public key from private key.
          * For more details read the man pages of rsa(1). */
@@ -197,3 +205,4 @@ error:
     }
     return NULL;
 }
+
